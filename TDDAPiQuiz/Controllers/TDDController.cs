@@ -40,5 +40,16 @@ namespace TDDAPiQuiz.Controllers
             _context.TDDTable.Add(tdd);
             _context.SaveChanges();
         }
+
+        [HttpDelete("DeleteTDD")]
+        public void DeleteTDD(int id)
+        {
+            var tdd = _context.TDDTable.FirstOrDefault(x => x.id == id);
+            if(tdd != null)
+            {
+                _context.TDDTable.Remove(tdd);
+                _context.SaveChanges();
+            }
+        }
     }
 }
