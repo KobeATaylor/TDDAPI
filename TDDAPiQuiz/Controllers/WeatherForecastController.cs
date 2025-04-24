@@ -29,5 +29,11 @@ namespace TDDAPiQuiz.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("HelloWorld")]
+        public IActionResult GetHelloWorld()
+        {
+            return Ok("Hello World");
+        }
     }
 }
