@@ -26,5 +26,11 @@ namespace TDDAPiQuiz.Controllers
                 return StatusCode(500, "Context not successful");
             }
         }
+
+        [HttpGet("GetTDD")]
+        public IActionResult GetTDD()
+        {
+            return Ok(_context.TDDTable.ToList());
+        }
     }
 }
