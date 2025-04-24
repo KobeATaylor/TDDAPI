@@ -33,7 +33,7 @@ namespace TDDAPiQuiz.Controllers
         [HttpGet("ConnectionString")]
         public IActionResult TestConnectionString()
         {
-            string connectionString = "";
+            string connectionString = "Server = CS-20\\SQLEXPRESS; Initial Catalog = TDDdb; Trusted_Connection = True; TrustServerCertificate = True";
 
             try
             {
