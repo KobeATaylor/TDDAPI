@@ -1,0 +1,6 @@
+@TDDAPiQuiz_HostAddress = http://localhost:5244
+
+GET {{TDDAPiQuiz_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
