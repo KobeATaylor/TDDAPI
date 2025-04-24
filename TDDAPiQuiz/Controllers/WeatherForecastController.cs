@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using TDDAPiQuiz.Data;
 namespace TDDAPiQuiz.Controllers
 {
     [ApiController]
@@ -13,9 +14,12 @@ namespace TDDAPiQuiz.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        private readonly TDDContext _context;
+
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, TDDContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -30,20 +34,16 @@ namespace TDDAPiQuiz.Controllers
             .ToArray();
         }
 
-        [HttpGet("ConnectionString")]
-        public IActionResult TestConnectionString()
+        [HttpGet("ContextTest")]
+        public IActionResult ContextTest()
         {
-            string connectionString = "Server = CS-20\\SQLEXPRESS; Initial Catalog = TDDdb; Trusted_Connection = True; TrustServerCertificate = True";
-
-            try
+            if (_context != null)
             {
-                using var connection = new SqlConnection(connectionString);
-                connection.Open();
-                return Ok("Connected to SQL Database");
+                return Ok("Context successful!");
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, $"Failed to connect: {ex.Message}");
+                return StatusCode(500, "Context not successful");
             }
         }
     }
