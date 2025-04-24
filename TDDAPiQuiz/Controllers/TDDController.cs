@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using TDDAPiQuiz.Data;
+using TDDAPiQuiz.Models;
 namespace TDDAPiQuiz.Controllers
 {
     [ApiController]
@@ -31,6 +32,13 @@ namespace TDDAPiQuiz.Controllers
         public IActionResult GetTDD()
         {
             return Ok(_context.TDDTable.ToList());
+        }
+
+        [HttpPost("PostTDD")]
+        public void PostTDD(TDDModel tdd)
+        {
+            _context.TDDTable.Add(tdd);
+            _context.SaveChanges();
         }
     }
 }
