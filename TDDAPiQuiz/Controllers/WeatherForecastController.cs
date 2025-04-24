@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.Data.SqlClient;
 namespace TDDAPiQuiz.Controllers
 {
     [ApiController]
@@ -30,10 +30,21 @@ namespace TDDAPiQuiz.Controllers
             .ToArray();
         }
 
-        [HttpGet("HelloWorld")]
-        public IActionResult GetHelloWorld()
+        [HttpGet("ConnectionString")]
+        public IActionResult TestConnectionString()
         {
-            return Ok("Hello World");
+            string connectionString = "";
+
+            try
+            {
+                using var connection = new SqlConnection(connectionString);
+                connection.Open();
+                return Ok("Connected to SQL Database");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Failed to connect: {ex.Message}");
+            }
         }
     }
 }
